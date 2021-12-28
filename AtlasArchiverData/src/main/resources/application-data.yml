@@ -1,0 +1,10 @@
+spring:
+  profile: data
+  datasource:
+    url: jdbc:postgresql://localhost:26257/atlas_archiver?sslmode=disable
+    driver-class-name: org.postgresql.Driver
+    username: root
+    password:
+    hikari:
+      maximum-pool-size: 4
+      connection-init-sql: SELECT 1
