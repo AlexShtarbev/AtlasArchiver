@@ -51,7 +51,6 @@ public abstract class AbstractCockroachDbTest {
 
     static Flyway getFlyway() {
         ClassicConfiguration configuration = new ClassicConfiguration();
-        configuration.setUrl(cockroachDbContainer.getJdbcUrl());
         configuration.setDataSource(cockroachDbContainer.getJdbcUrl(), DB_USERNAME, DB_PASSWORD);
         return new Flyway(configuration);
     }

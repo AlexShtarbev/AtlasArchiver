@@ -33,6 +33,7 @@
 		<org.springframework.version>5.3.13</org.springframework.version>
 		<org.testcontainers.version>1.16.2</org.testcontainers.version>
 		<org.flywaydb.version>8.2.3</org.flywaydb.version>
+		<org.assert4j.version>3.21.0</org.assert4j.version>
 	</properties>
 
 	<dependencyManagement>
@@ -121,6 +122,12 @@
 				<groupId>org.testcontainers</groupId>
 				<artifactId>cockroachdb</artifactId>
 				<version>${org.testcontainers.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.assertj</groupId>
+				<artifactId>assertj-core</artifactId>
+				<version>${org.assert4j.version}</version>
 				<scope>test</scope>
 			</dependency>
 		</dependencies>
