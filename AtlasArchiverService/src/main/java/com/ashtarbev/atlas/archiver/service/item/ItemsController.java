@@ -1,30 +1,28 @@
 package com.ashtarbev.atlas.archiver.service.item;
 
 import com.ashtarbev.atlas.archiver.core.item.*;
-import com.ashtarbev.atlas.archiver.data.ItemRepository;
+import com.ashtarbev.atlas.archiver.data.ItemsRepository;
 import com.ashtarbev.atlas.archiver.service.item.exceptions.ImageMetadataExtractionException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
 
 @RestController
 @RequestMapping("/items")
-public class ItemController {
-  private static final Logger LOG =  LogManager.getLogger(ItemController.class);
+public class ItemsController {
+  private static final Logger LOG =  LogManager.getLogger(ItemsController.class);
   private final UrlMetadataExtractor urlMetadataExtractor;
-  private final ItemRepository itemRepository;
+  private final ItemsRepository itemsRepository;
 
-  public ItemController(UrlMetadataExtractor urlMetadataExtractor, ItemRepository itemRepository) {
+  public ItemsController(UrlMetadataExtractor urlMetadataExtractor, ItemsRepository itemsRepository) {
     this.urlMetadataExtractor = urlMetadataExtractor;
-    this.itemRepository = itemRepository;
+    this.itemsRepository = itemsRepository;
   }
 
   @PostMapping("")
@@ -39,7 +37,7 @@ public class ItemController {
               .imageUrl(metadata.getImageUrl())
               .addedTimestamp(Timestamp.from(Instant.now()))
               .build();
-      Item savedItem = itemRepository.save(item);
+      Item savedItem = itemsRepository.save(item);
       return ResponseEntity.ok().body(savedItem);
     } catch (ImageMetadataExtractionException e) {
       LOG.error(e);
@@ -49,7 +47,7 @@ public class ItemController {
 
   @GetMapping("/{userId}")
   public HttpEntity<StoredItemsPerUser> getStoredItemsPerUser(@PathVariable long userId) {
-    List<Item> allItems = itemRepository.getAllItemsForUser(userId);
+    List<Item> allItems = itemsRepository.getAllItemsForUser(userId);
     StoredItemsPerUser storedItemsPerUser = StoredItemsPerUser.builder()
             .items(allItems)
             .build();
