@@ -21,11 +21,14 @@
     <module>AtlasArchiverService</module>
 		<module>AtlasArchiverData</module>
 		<module>AtlasArchiverCore</module>
-	</modules>
+        <module>AtlasArchiverUI</module>
+    </modules>
 
 	<properties>
 		<java.version>11</java.version>
 		<org.springframework.boot.version>2.6.1</org.springframework.boot.version>
+		<org.springframework.data.version>2.3.0</org.springframework.data.version>
+		<org.springframework.data.spring-data-commons>2.6.0</org.springframework.data.spring-data-commons>
 		<org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
 		<org.projectlombok.lombok.version>1.18.22</org.projectlombok.lombok.version>
 		<com.fasterxml.jackson.version>2.13.0</com.fasterxml.jackson.version>
@@ -34,6 +37,10 @@
 		<org.testcontainers.version>1.16.2</org.testcontainers.version>
 		<org.flywaydb.version>8.2.3</org.flywaydb.version>
 		<org.assert4j.version>3.21.0</org.assert4j.version>
+		<com.vaadin.version>22.0.2</com.vaadin.version>
+		<org.maven.dependency.plugin.version>3.2.0</org.maven.dependency.plugin.version>
+		<org.junit.version>4.13.2</org.junit.version>
+		<org.junit.jupiter.version>5.8.1</org.junit.jupiter.version>
 	</properties>
 
 	<dependencyManagement>
@@ -42,7 +49,6 @@
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
 				<version>${org.projectlombok.lombok.version}</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>com.ashtarbev.atlas.archiver</groupId>
@@ -94,6 +100,57 @@
 				<artifactId>log4j-core</artifactId>
 				<version>${org.apache.logging.log4j.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-relational</artifactId>
+				<version>${org.springframework.data.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-commons</artifactId>
+				<version>${org.springframework.data.spring-data-commons}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-jdbc</artifactId>
+				<version>${org.springframework.data.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-autoconfigure</artifactId>
+				<version>${org.springframework.boot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot</artifactId>
+				<version>${org.springframework.boot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-bom</artifactId>
+				<version>${com.vaadin.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-spring-boot-starter</artifactId>
+				<version>${com.vaadin.version}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-dependency-plugin -->
+			<dependency>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>${org.maven.dependency.plugin.version}</version>
+			</dependency>
 
 			<!-- test -->
 			<dependency>
@@ -130,6 +187,18 @@
 				<version>${org.assert4j.version}</version>
 				<scope>test</scope>
 			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${org.junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-api</artifactId>
+				<version>5.8.1</version>
+				<scope>test</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -159,6 +228,12 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.22.0</version>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>${org.maven.dependency.plugin.version}</version>
+			</plugin>
+
 		</plugins>
 	</build>
 </project>
