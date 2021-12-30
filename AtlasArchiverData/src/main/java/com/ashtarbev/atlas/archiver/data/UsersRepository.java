@@ -20,6 +20,10 @@ public interface UsersRepository extends CrudRepository<User, Long> {
   List<User> getAllUsers();
 
   @Modifying
+  @Query("DELETE FROM users WHERE id = :id")
+  void deleteUserById(@Param("id") long id);
+
+  @Modifying
   @Query("DELETE FROM users")
   void deleteAll();
 }

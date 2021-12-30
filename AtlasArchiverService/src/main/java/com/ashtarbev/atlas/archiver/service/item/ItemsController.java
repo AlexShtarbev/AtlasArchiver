@@ -55,6 +55,12 @@ public class ItemsController {
     return ResponseEntity.ok().body(storedItemsPerUser);
   }
 
+  @DeleteMapping("/{userId}/${itemId}")
+  public HttpEntity<Void> deleteItemForUserIdAndItemId(@PathVariable long userId, @PathVariable long itemId) {
+    itemsRepository.deleteItemById(itemId, userId);
+    return ResponseEntity.ok().build();
+  }
+
   @GetMapping("parse")
   public HttpEntity<ItemMetadata> parse(@RequestParam("url") String url) {
     try {

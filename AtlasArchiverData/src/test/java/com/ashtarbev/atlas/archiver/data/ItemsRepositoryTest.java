@@ -65,6 +65,18 @@ public class ItemsRepositoryTest extends AbstractCockroachDbTest{
         });
     }
 
+    @Test
+    public void shouldDeleteItemById() {
+        User user = usersRepository.save(userMapper.toUser(getUserToStore()));
+        Item storedItem = itemsRepository.save(getItem(user.getId()));
+        Optional<Item> itemFromDB = itemsRepository.getItemById(storedItem.getId());
+        assertThat(itemFromDB).isPresent();
+        itemsRepository.deleteItemById(itemFromDB.get().getId(), itemFromDB.get().getUserId());
+
+        itemFromDB = itemsRepository.getItemById(storedItem.getId());
+        assertThat(itemFromDB).isEmpty();
+    }
+
     private Item getItem(long userId) {
         return Item.builder()
                 .userId(userId)

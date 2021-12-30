@@ -48,6 +48,14 @@ public class UsersRepositoryTest extends AbstractCockroachDbTest {
         assertThat(allSavedUsers).isEqualTo(users);
     }
 
+    @Test
+    public void shouldDeleteUserById() {
+        User user = usersRepository.save(userMapper.toUser(getUserToStore()));
+        usersRepository.deleteUserById(user.getId());
+        Optional<User> userFromDB = usersRepository.getUserById(user.getId());
+        assertThat(userFromDB).isEmpty();
+    }
+
     private UserToStore getUserToStore() {
         return UserToStore.builder()
                 .email(String.format("%s@test.com", UUID.randomUUID()))

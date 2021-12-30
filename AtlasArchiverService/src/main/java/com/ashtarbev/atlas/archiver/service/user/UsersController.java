@@ -33,6 +33,12 @@ public class UsersController {
     }
   }
 
+  @DeleteMapping("")
+  public HttpEntity<Void> deleteUser(@PathVariable long userId) {
+    usersRepository.deleteById(userId);
+    return ResponseEntity.ok().build();
+  }
+
   @GetMapping("/all")
   public HttpEntity<List<User>> getAllUsers() {
     try {
