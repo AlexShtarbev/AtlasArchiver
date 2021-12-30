@@ -22,6 +22,10 @@ public interface ItemsRepository extends CrudRepository<Item, Long> {
     List<Item> getAllItemsForUser(@Param("userId") long userId);
 
     @Modifying
+    @Query("DELETE FROM items WHERE id = :id AND user_id = :userId")
+    void deleteItemById(@Param("id") long id, @Param("userId") long userId);
+
+    @Modifying
     @Query("DELETE FROM items")
     void deleteAll();
 }
