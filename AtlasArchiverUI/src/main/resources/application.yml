@@ -1,0 +1,10 @@
+server:
+  port: 9091
+---
+spring:
+  profiles: dev
+  baseUrl: "http://localhost:9090"
+---
+spring:
+  profiles: prod
+  baseUrl: "localhost:8080"

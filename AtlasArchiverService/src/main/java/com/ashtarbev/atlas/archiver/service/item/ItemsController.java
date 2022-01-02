@@ -55,7 +55,7 @@ public class ItemsController {
     return ResponseEntity.ok().body(storedItemsPerUser);
   }
 
-  @DeleteMapping("/{userId}/${itemId}")
+  @DeleteMapping("/{userId}/{itemId}")
   public HttpEntity<Void> deleteItemForUserIdAndItemId(@PathVariable long userId, @PathVariable long itemId) {
     itemsRepository.deleteItemById(itemId, userId);
     return ResponseEntity.ok().build();
